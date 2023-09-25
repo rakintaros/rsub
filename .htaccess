@@ -1,0 +1,16 @@
+Options -Indexes
+php_value upload_max_filesize 204800M  
+php_value post_max_size 204800M  
+php_value max_input_time 3600000  
+php_value max_execution_time 3600000
+
+php_value max_input_vars 5000000
+
+RewriteEngine on
+RewriteCond $1 !^(index\.php|assets|template|img|robots\.txt)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA] 
+
+RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [L,R=301]
